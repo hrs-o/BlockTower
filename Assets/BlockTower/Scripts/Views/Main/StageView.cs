@@ -30,18 +30,34 @@ namespace BlockTower.Views.Main
                 .AddTo(this);
 
             _presenter.GenerateBlockAsObservable
-                .Subscribe(GenerateBlock)
+                .Subscribe(generateHeight => GenerateBlockAsync(generateHeight).Forget())
                 .AddTo(this);
 
             _gameStatePublisher.Publish(GameState.Init);
         }
 
-        private void GenerateBlock(float generateHeight)
+        private async UniTaskVoid GenerateBlockAsync(float generateHeight)
         {
+            while (IsMovingBlocks())
+            {
+                if (_cancelTokenSrc.Token.IsCancellationRequested) return;
+                await UniTask.Delay(500, cancellationToken: _cancelTokenSrc.Token);
+            }
+
             var block = _resolver.Instantiate(blockTemplate);
             block.Init(generateHeight);
             _blocks.Add(block);
             _gameStatePublisher.Publish(GameState.GeneratedBlock);
+        }
+
+        private bool IsMovingBlocks()
+        {
+            for (var i = 0; i < _blocks.Count; i++)
+            {
+                if (_blocks[i].IsMoving()) return true;
+            }
+
+            return false;
         }
 
         private async UniTaskVoid Init()

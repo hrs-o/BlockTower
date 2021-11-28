@@ -26,7 +26,12 @@ namespace BlockTower.Views.Main.Block
             gameObject.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
             gameObject.AddComponent<PolygonCollider2D>();
         }
-        
+
+        internal bool IsMoving()
+        {
+            return !_rigidbody.IsSleeping();
+        }
+
         private void ResolveInjections()
         {
             Resolve<BlockFaller>();

@@ -1,14 +1,19 @@
 ﻿using System;
+using BlockTower.Presenters.Main.Enums;
+using MessagePipe;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VContainer;
 
 namespace BlockTower.Views.Main.Block
 {
     public class BlockFaller : MonoBehaviour
     {
         private const float StopWaitSec = 1f;
+
+        [Inject] private IPublisher<GameState> _gameStatePublisher;
 
         private InputAction _inputPress;
         private Rigidbody2D _rigidbody;
@@ -50,6 +55,7 @@ namespace BlockTower.Views.Main.Block
             if (!(_stopElapsedSec >= StopWaitSec)) return;
             _stoppedDisposable?.Dispose();
             _stopElapsedSec = 0;
+            _gameStatePublisher.Publish(GameState.GeneratingBlock);
         }
 
         private void FallBlock()
