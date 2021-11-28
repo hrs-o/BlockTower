@@ -1,12 +1,15 @@
 ﻿using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace BlockTower.Views.Main.Block
 {
     public class BlockRotator : MonoBehaviour
     {
         [SerializeField] private float rotateAngle = 30f;
+        [SerializeField] private Button rotateLeftButton;
+        [SerializeField] private Button rotateRightButton;
 
         private InputAction _inputRotateLeft;
         private InputAction _inputRotateRight;
@@ -34,6 +37,16 @@ namespace BlockTower.Views.Main.Block
 
             this.ObserveEveryValueChanged(_ => _inputRotateRight.WasPressedThisFrame())
                 .Where(wasPressed => wasPressed)
+                .Subscribe(_ => RotateRight())
+                .AddTo(this)
+                .AddTo(_disposables);
+
+            rotateLeftButton.OnClickAsObservable()
+                .Subscribe(_ => RotateLeft())
+                .AddTo(this)
+                .AddTo(_disposables);
+
+            rotateRightButton.OnClickAsObservable()
                 .Subscribe(_ => RotateRight())
                 .AddTo(this)
                 .AddTo(_disposables);
