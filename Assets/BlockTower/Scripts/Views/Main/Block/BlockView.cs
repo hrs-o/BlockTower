@@ -35,6 +35,7 @@ namespace BlockTower.Views.Main.Block
         private void ResolveInjections()
         {
             Resolve<BlockFaller>();
+            Resolve<BlockDestroyer>();
         }
 
         private void Resolve<T>()

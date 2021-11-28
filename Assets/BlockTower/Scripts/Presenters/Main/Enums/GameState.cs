@@ -7,5 +7,6 @@
         MovingCamera,
         GeneratingBlock,
         GeneratedBlock,
+        Result
     }
 }

@@ -32,6 +32,7 @@ namespace BlockTower.LifetimeScopes
             builder.RegisterComponentInHierarchy<CameraMover>();
             builder.RegisterComponentInHierarchy<MoveCameraAreaView>();
             builder.RegisterComponentInHierarchy<MoveCameraAreaMover>();
+            builder.RegisterComponentInHierarchy<ResultView>();
         }
 
         private void RegisterEntryPoint(IContainerBuilder builder)
@@ -41,6 +42,7 @@ namespace BlockTower.LifetimeScopes
                 entryPoints.Add<CountdownTextPresenter>().AsSelf();
                 entryPoints.Add<StagePresenter>().AsSelf();
                 entryPoints.Add<MoveCameraAreaPresenter>().AsSelf();
+                entryPoints.Add<ResultPresenter>().AsSelf();
             });
         }
 
