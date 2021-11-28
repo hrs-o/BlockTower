@@ -2,7 +2,9 @@
 {
     public enum GameState
     {
+        Init,
         Countdown,
         GeneratingBlock,
+        GeneratedBlock,
     }
 }

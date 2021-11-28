@@ -35,6 +35,7 @@ namespace BlockTower.LifetimeScopes
             builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
             {
                 entryPoints.Add<CountdownTextPresenter>().AsSelf();
+                entryPoints.Add<StagePresenter>().AsSelf();
             });
         }
 
