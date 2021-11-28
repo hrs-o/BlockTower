@@ -4,6 +4,7 @@
     {
         Init,
         Countdown,
+        MovingCamera,
         GeneratingBlock,
         GeneratedBlock,
     }

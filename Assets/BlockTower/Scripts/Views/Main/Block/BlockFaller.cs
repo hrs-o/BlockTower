@@ -55,7 +55,7 @@ namespace BlockTower.Views.Main.Block
             if (!(_stopElapsedSec >= StopWaitSec)) return;
             _stoppedDisposable?.Dispose();
             _stopElapsedSec = 0;
-            _gameStatePublisher.Publish(GameState.GeneratingBlock);
+            _gameStatePublisher.Publish(GameState.MovingCamera);
         }
 
         private void FallBlock()

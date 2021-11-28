@@ -3,6 +3,7 @@ using BlockTower.Models.Main.Interfaces;
 using BlockTower.Presenters.Main;
 using BlockTower.Presenters.Main.Enums;
 using BlockTower.Views.Main;
+using BlockTower.Views.Main.MoveCameraArea;
 using MessagePipe;
 using VContainer;
 using VContainer.Unity;
@@ -28,6 +29,9 @@ namespace BlockTower.LifetimeScopes
         {
             builder.RegisterComponentInHierarchy<CountdownTextView>();
             builder.RegisterComponentInHierarchy<StageView>();
+            builder.RegisterComponentInHierarchy<CameraMover>();
+            builder.RegisterComponentInHierarchy<MoveCameraAreaView>();
+            builder.RegisterComponentInHierarchy<MoveCameraAreaMover>();
         }
 
         private void RegisterEntryPoint(IContainerBuilder builder)
@@ -36,6 +40,7 @@ namespace BlockTower.LifetimeScopes
             {
                 entryPoints.Add<CountdownTextPresenter>().AsSelf();
                 entryPoints.Add<StagePresenter>().AsSelf();
+                entryPoints.Add<MoveCameraAreaPresenter>().AsSelf();
             });
         }
 

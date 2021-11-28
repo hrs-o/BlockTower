@@ -13,6 +13,7 @@ namespace BlockTower.Presenters.Main
     {
         private const float DefaultGenerateHeight = 3f;
 
+        [Inject] private MoveCameraAreaPresenter _moveCameraAreaPresenter;
         [Inject] private ISubscriber<GameState> _onGameStateChanged;
 
         private float _currentGenerateHeightOffset;
@@ -29,6 +30,10 @@ namespace BlockTower.Presenters.Main
         {
             _generateBlockSubject.AddTo(_disposable);
             _initBlockSubject.AddTo(_disposable);
+            
+            _moveCameraAreaPresenter.AddMoveCameraHeightOffsetAsObservable
+                .Subscribe(offset => _currentGenerateHeightOffset += offset)
+                .AddTo(_disposable);
 
             _onGameStateChanged
                 .AsObservable()
