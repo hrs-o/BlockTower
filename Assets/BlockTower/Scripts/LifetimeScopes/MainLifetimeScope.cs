@@ -33,6 +33,7 @@ namespace BlockTower.LifetimeScopes
             builder.RegisterComponentInHierarchy<MoveCameraAreaView>();
             builder.RegisterComponentInHierarchy<MoveCameraAreaMover>();
             builder.RegisterComponentInHierarchy<ResultView>();
+            builder.RegisterComponentInHierarchy<RestartButtonView>();
         }
 
         private void RegisterEntryPoint(IContainerBuilder builder)
